@@ -5,6 +5,8 @@ using System.Management.Automation.Subsystem.Prediction;
 namespace PowerShellPredictor;
 
 // https://adamtheautomator.com/psreadline/
+// https://learn.microsoft.com/en-us/powershell/scripting/learn/shell/using-predictors
+// https://learn.microsoft.com/en-us/powershell/scripting/dev-cross-plat/create-cmdline-predictor
 
 /// <summary>
 /// Register the predictor on module loading and unregister it on module un-loading.
