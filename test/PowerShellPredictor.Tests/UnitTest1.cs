@@ -1,4 +1,4 @@
-﻿namespace Project.Tests;
+﻿namespace PowerShellPredictor.Tests;
 
 public class UnitTest1
 {

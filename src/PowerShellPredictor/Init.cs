@@ -1,0 +1,29 @@
+using System.Management.Automation;
+using System.Management.Automation.Subsystem;
+
+namespace PowerShellPredictor;
+
+/// <summary>
+/// Register the predictor on module loading and unregister it on module un-loading.
+/// </summary>
+public class Init : IModuleAssemblyInitializer, IModuleAssemblyCleanup
+{
+    private const string Identifier = "7a8fe587-1d53-47e0-8919-dd5cb3b56125";
+
+    /// <summary>
+    /// Gets called when assembly is loaded.
+    /// </summary>
+    public void OnImport()
+    {
+        var predictor = new SamplePredictor(Identifier);
+        SubsystemManager.RegisterSubsystem(SubsystemKind.CommandPredictor, predictor);
+    }
+
+    /// <summary>
+    /// Gets called when the binary module is unloaded.
+    /// </summary>
+    public void OnRemove(PSModuleInfo psModuleInfo)
+    {
+        SubsystemManager.UnregisterSubsystem(SubsystemKind.CommandPredictor, new Guid(Identifier));
+    }
+}

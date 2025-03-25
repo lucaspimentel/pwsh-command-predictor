@@ -1,0 +1,4 @@
+﻿<Solution>
+  <Project Path="src\PowerShellPredictor\PowerShellPredictor.csproj" Type="Classic C#" />
+  <Project Path="test\PowerShellPredictor.Tests\PowerShellPredictor.Tests.csproj" Type="Classic C#" />
+</Solution>

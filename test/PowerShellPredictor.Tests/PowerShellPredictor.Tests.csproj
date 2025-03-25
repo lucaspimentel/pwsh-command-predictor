@@ -19,7 +19,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\Project\Project.csproj" />
+    <ProjectReference Include="..\..\src\PowerShellPredictor\PowerShellPredictor.csproj" />
   </ItemGroup>
 
 </Project>
