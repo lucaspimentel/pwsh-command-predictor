@@ -1,22 +1,32 @@
 using System.Management.Automation;
 using System.Management.Automation.Subsystem;
+using System.Management.Automation.Subsystem.Prediction;
 
 namespace PowerShellPredictor;
+
+// https://adamtheautomator.com/psreadline/
 
 /// <summary>
 /// Register the predictor on module loading and unregister it on module un-loading.
 /// </summary>
 public class Init : IModuleAssemblyInitializer, IModuleAssemblyCleanup
 {
-    private const string Identifier = "7a8fe587-1d53-47e0-8919-dd5cb3b56125";
+    private readonly List<Guid> _identifiers = [];
 
     /// <summary>
     /// Gets called when assembly is loaded.
     /// </summary>
     public void OnImport()
     {
-        var predictor = new SamplePredictor(Identifier);
-        SubsystemManager.RegisterSubsystem(SubsystemKind.CommandPredictor, predictor);
+        RegisterSubsystem(new KnownCommandsPredictor());
+        // RegisterSubsystem(new SamplePredictor());
+        // RegisterSubsystem(new OpenAiPredictor());
+    }
+
+    private void RegisterSubsystem(ICommandPredictor commandPredictor)
+    {
+        _identifiers.Add(commandPredictor.Id);
+        SubsystemManager.RegisterSubsystem(SubsystemKind.CommandPredictor, commandPredictor);
     }
 
     /// <summary>
@@ -24,6 +34,9 @@ public class Init : IModuleAssemblyInitializer, IModuleAssemblyCleanup
     /// </summary>
     public void OnRemove(PSModuleInfo psModuleInfo)
     {
-        SubsystemManager.UnregisterSubsystem(SubsystemKind.CommandPredictor, new Guid(Identifier));
+        foreach (var id in _identifiers)
+        {
+            SubsystemManager.UnregisterSubsystem(SubsystemKind.CommandPredictor, id);
+        }
     }
 }

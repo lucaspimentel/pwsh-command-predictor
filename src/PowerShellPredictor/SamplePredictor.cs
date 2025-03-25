@@ -2,19 +2,12 @@
 
 namespace PowerShellPredictor;
 
-// https://adamtheautomator.com/psreadline/
-
 public class SamplePredictor : ICommandPredictor
 {
-    internal SamplePredictor(string guid)
-    {
-        Id = new Guid(guid);
-    }
-
     /// <summary>
     /// Gets the unique identifier for a subsystem implementation.
     /// </summary>
-    public Guid Id { get; }
+    public Guid Id { get; } = new("7a8fe587-1d53-47e0-8919-dd5cb3b56125");
 
     /// <summary>
     /// Gets the name of a subsystem implementation.
