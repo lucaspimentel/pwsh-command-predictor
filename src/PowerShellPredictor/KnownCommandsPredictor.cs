@@ -12,7 +12,7 @@ public class KnownCommandsPredictor : ICommandPredictor
     /// <summary>
     /// Gets the name of a subsystem implementation.
     /// </summary>
-    public string Name => "Lucas Plugin";
+    public string Name => "Lucas Known Commands";
 
     /// <summary>
     /// Gets the description of a subsystem implementation.

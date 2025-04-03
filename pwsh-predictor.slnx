@@ -1,4 +1,5 @@
 ﻿<Solution>
+  <Project Path="..\pwsh-argument-completer\src\PowerShellArgumentCompleter.csproj" Type="Classic C#" />
   <Project Path="src\PowerShellPredictor.Cli\PowerShellPredictor.Cli.csproj" Type="Classic C#" />
   <Project Path="src\PowerShellPredictor\PowerShellPredictor.csproj" Type="Classic C#" />
   <Project Path="test\PowerShellPredictor.Tests\PowerShellPredictor.Tests.csproj" Type="Classic C#" />

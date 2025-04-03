@@ -20,7 +20,8 @@ public class Init : IModuleAssemblyInitializer, IModuleAssemblyCleanup
     /// </summary>
     public void OnImport()
     {
-        RegisterSubsystem(new KnownCommandsPredictor());
+        RegisterSubsystem(new CommandCompleterPredictor());
+        // RegisterSubsystem(new KnownCommandsPredictor());
         // RegisterSubsystem(new SamplePredictor());
         // RegisterSubsystem(new OpenAiPredictor());
     }
