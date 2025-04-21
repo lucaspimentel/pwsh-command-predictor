@@ -1,7 +1,5 @@
 ﻿using System.Management.Automation.Subsystem.Prediction;
-using OpenAI.Assistants;
 using PowerShellArgumentCompleter;
-using PowerShellArgumentCompleter.Completions;
 
 namespace PowerShellPredictor;
 

@@ -8,10 +8,14 @@
 
     <ItemGroup>
         <PackageReference Include="Microsoft.PowerShell.SDK" Version="7.5.0" />
-        <PackageReference Include="OpenAI" Version="2.2.0-beta.4" />
     </ItemGroup>
 
     <ItemGroup>
       <ProjectReference Include="..\..\..\pwsh-argument-completer\src\PowerShellArgumentCompleter.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Compile Remove="KnownCommandsPredictor.cs" />
+      <Compile Remove="SamplePredictor.cs" />
     </ItemGroup>
 </Project>
