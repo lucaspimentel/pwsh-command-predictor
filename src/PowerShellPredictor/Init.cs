@@ -20,10 +20,10 @@ public class Init : IModuleAssemblyInitializer, IModuleAssemblyCleanup
     /// </summary>
     public void OnImport()
     {
-        RegisterSubsystem(new CommandCompleterPredictor());
+        // RegisterSubsystem(new CommandCompleterPredictor());
         // RegisterSubsystem(new KnownCommandsPredictor());
         // RegisterSubsystem(new SamplePredictor());
-        // RegisterSubsystem(new OpenAiPredictor());
+        RegisterSubsystem(new AiPredictor());
     }
 
     private void RegisterSubsystem(ICommandPredictor commandPredictor)
@@ -41,5 +41,8 @@ public class Init : IModuleAssemblyInitializer, IModuleAssemblyCleanup
         {
             SubsystemManager.UnregisterSubsystem(SubsystemKind.CommandPredictor, id);
         }
+
+        // Cleanup AI resources
+        AiPredictor.Cleanup();
     }
 }

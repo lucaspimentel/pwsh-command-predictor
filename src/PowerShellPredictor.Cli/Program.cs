@@ -4,7 +4,7 @@ using PowerShellPredictor;
 var predictionContext = PredictionContext.Create(args[0]);
 var predictionClient = new PredictionClient("PowerShellPredictor.Cli", PredictionClientKind.Terminal);
 
-var predictor = new CommandCompleterPredictor();
+var predictor = new AiPredictor();
 var suggestionPackage = predictor.GetSuggestion(predictionClient, predictionContext, CancellationToken.None);
 
 suggestionPackage.SuggestionEntries?.ForEach(suggestion => Console.WriteLine(suggestion.SuggestionText));
