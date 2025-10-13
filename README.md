@@ -45,11 +45,11 @@ git che  # Should suggest "git checkout"
 
 ## How It Works
 
-The module uses `CommandCompleterPredictor` which leverages PowerShell's native argument completer to provide context-aware suggestions based on:
-- Command syntax
-- Available parameters
-- File paths
-- History patterns
+The module uses `CommandCompleterPredictor` which integrates with [PowerShellArgumentCompleter](https://github.com/lucaspimentel/pwsh-argument-completer) to provide intelligent command-line suggestions. The predictor:
+- Detects command and parameter context from partial input
+- Queries available completions via PowerShellArgumentCompleter
+- Merges completions with the input line using overlap detection
+- Provides context-aware suggestions for commands, parameters, and values
 
 ## Development
 
