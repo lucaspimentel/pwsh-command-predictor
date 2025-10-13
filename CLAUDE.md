@@ -26,6 +26,11 @@ PowerShell predictor module providing command-line suggestions via PowerShell's 
 3. **PowerShellPredictor.Tests** (`test/PowerShellPredictor.Tests/`)
    - xUnit test project
 
+4. **module/** (PowerShell Module Distribution)
+   - `Lucas.PowerShellPredictor.psd1`: Module manifest (v0.1.0)
+   - `Lucas.PowerShellPredictor.psm1`: Script module wrapper
+   - Requires compiled `Lucas.PowerShellPredictor.dll` from build output
+
 ### Key Dependencies
 
 - **Microsoft.PowerShell.SDK** (v7.5.0, PrivateAssets=all) - PowerShell subsystem APIs
@@ -48,6 +53,12 @@ dotnet test
 
 # Test predictor via CLI
 dotnet run --project src/PowerShellPredictor.Cli/ -- "git che"
+
+# Build and install module
+dotnet build src/PowerShellPredictor/ -c Release
+Copy-Item src/PowerShellPredictor/bin/Release/net9.0/PowerShellPredictor.dll module/Lucas.PowerShellPredictor.dll
+Import-Module ./module/Lucas.PowerShellPredictor.psd1
+Set-PSReadLineOption -PredictionSource HistoryAndPlugin
 ```
 
 ## Key Implementation Details
@@ -110,3 +121,12 @@ To re-enable the AI predictor:
 - **Loading**: Lazy singleton pattern (AiPredictor.cs:35-75)
 - **Performance**: 5-15s initial load, 100-500ms per prediction
 - **Documentation**: See `ai/README.md` and `ai/SETUP-MODEL.md`
+
+## What's Next (Future Features)
+
+- **Installation Script**: Create automated installer for easy distribution
+  - Build script to compile and package module for releases
+  - Install script: `irm https://github.com/lucaspimentel/pwsh-predictor/main/install.ps1 | iex`
+  - GitHub Actions workflow for automated releases on version tags
+  - Publish pre-built binaries as GitHub release artifacts
+  - Optional: Publish to PowerShell Gallery for `Install-Module` support
