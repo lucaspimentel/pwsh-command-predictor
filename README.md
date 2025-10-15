@@ -4,36 +4,45 @@ PowerShell predictor module providing intelligent command-line suggestions via P
 
 ## Quick Start
 
-### Build
+### Installation
+
+**Automated installation (recommended):**
 
 ```powershell
-dotnet build
+# Clone the repository
+git clone https://github.com/lucaspimentel/pwsh-command-predictor.git
+cd pwsh-command-predictor
+
+# Run installation script
+pwsh -NoProfile ./install.ps1
 ```
 
-### Install
+The installation script will:
+- Build the module using `dotnet build`
+- Install to `~/.local/pwsh-modules/Lucas.PowerShellPredictor/`
+- Provide instructions for adding to your PowerShell profile
+
+**After installation**, add these lines to your PowerShell profile (`$PROFILE`):
+
+```powershell
+Import-Module ~/.local/pwsh-modules/Lucas.PowerShellPredictor/Lucas.PowerShellPredictor.psd1
+Set-PSReadLineOption -PredictionSource HistoryAndPlugin
+```
+
+### Manual Installation
 
 ```powershell
 # Build the module
 dotnet build src/PowerShellPredictor/ -c Release
 
 # Copy the built DLL to the module directory
-Copy-Item src/PowerShellPredictor/bin/Release/net9.0/PowerShellPredictor.dll module/Lucas.PowerShellPredictor.dll
+Copy-Item src/PowerShellPredictor/bin/Release/net9.0/Lucas.PowerShellPredictor.dll module/
 
 # Import the module
 Import-Module ./module/Lucas.PowerShellPredictor.psd1
 
 # Enable predictions
 Set-PSReadLineOption -PredictionSource HistoryAndPlugin
-```
-
-**For permanent installation**, copy the `module/` directory to one of your PowerShell module paths:
-
-```powershell
-# View module paths
-$env:PSModulePath -split [IO.Path]::PathSeparator
-
-# Example: Copy to user modules directory
-Copy-Item -Recurse ./module/ "$HOME\Documents\PowerShell\Modules\Lucas.PowerShellPredictor"
 ```
 
 ### Test

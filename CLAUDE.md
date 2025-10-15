@@ -54,9 +54,12 @@ dotnet test
 # Test predictor via CLI
 dotnet run --project src/PowerShellPredictor.Cli/ -- "git che"
 
-# Build and install module
+# Build and install module (automated)
+pwsh -NoProfile ./install.ps1
+
+# Manual installation
 dotnet build src/PowerShellPredictor/ -c Release
-Copy-Item src/PowerShellPredictor/bin/Release/net9.0/PowerShellPredictor.dll module/Lucas.PowerShellPredictor.dll
+Copy-Item src/PowerShellPredictor/bin/Release/net9.0/Lucas.PowerShellPredictor.dll module/
 Import-Module ./module/Lucas.PowerShellPredictor.psd1
 Set-PSReadLineOption -PredictionSource HistoryAndPlugin
 ```
@@ -122,11 +125,39 @@ To re-enable the AI predictor:
 - **Performance**: 5-15s initial load, 100-500ms per prediction
 - **Documentation**: See `ai/README.md` and `ai/SETUP-MODEL.md`
 
+## Installation
+
+### Automated Installation (Recommended)
+
+```bash
+pwsh -NoProfile ./install.ps1
+```
+
+**What it does**:
+- Builds the module with `dotnet build` (Release configuration)
+- Installs to `~/.local/pwsh-modules/Lucas.PowerShellPredictor/`
+- Provides instructions for adding to PowerShell profile
+
+**Post-install**: Add to your `$PROFILE`:
+```powershell
+Import-Module ~/.local/pwsh-modules/Lucas.PowerShellPredictor/Lucas.PowerShellPredictor.psd1
+Set-PSReadLineOption -PredictionSource HistoryAndPlugin
+```
+
+### Manual Installation
+
+See Quick Commands section above for manual build/install steps.
+
 ## What's Next (Future Features)
 
-- **Installation Script**: Create automated installer for easy distribution
-  - Build script to compile and package module for releases
+- **Remote Installation**: Enable web-based installation
   - Install script: `irm https://github.com/lucaspimentel/pwsh-predictor/main/install.ps1 | iex`
-  - GitHub Actions workflow for automated releases on version tags
-  - Publish pre-built binaries as GitHub release artifacts
-  - Optional: Publish to PowerShell Gallery for `Install-Module` support
+  - Requires HTTPS hosting and proper script signing
+- **GitHub Releases**: Automated releases via GitHub Actions
+  - Version tag triggers build workflow
+  - Publish pre-built binaries as release artifacts
+  - Create release notes from commit history
+- **PowerShell Gallery**: Optional publication for `Install-Module` support
+  - Register as PSGallery publisher
+  - Automate gallery publishing on releases
+  - Enable `Install-Module Lucas.PowerShellPredictor`
