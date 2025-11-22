@@ -1,3 +1,5 @@
+⚠️ *NOTE: this project has moved to https://github.com/lucaspimentel/PSCue*
+
 # PowerShell Predictor
 
 PowerShell predictor module providing intelligent command-line suggestions via PowerShell's prediction subsystem.
